@@ -1858,7 +1858,7 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Collection\Abstrac
      */
     protected function _productLimitationJoinPrice()
     {
-        return $this->_productLimitationPrice();
+        return $this->_productLimitationPrice(true);
     }
 
     /**
