@@ -298,7 +298,7 @@ abstract class AbstractAction
      */
     protected function isRangingNeeded()
     {
-        return true;
+        return false;
     }
 
     /**
