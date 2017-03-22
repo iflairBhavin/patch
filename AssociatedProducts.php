@@ -275,6 +275,8 @@ class AssociatedProducts
                         $attributes[$attribute->getAttributeId()]['chosen'][$optionId] = $variationOption;
                     }
 
+                    $simple_product = $this->productRepository->getById($product->getId());
+
                     $productMatrix[] = [
                         'id' => $product->getId(),
                         'product_link' => '<a href="' . $this->urlBuilder->getUrl(
@@ -282,6 +284,7 @@ class AssociatedProducts
                             ['id' => $product->getId()]
                         ) . '" target="_blank">' . $product->getName() . '</a>',
                         'sku' => $product->getSku(),
+                        'ean13' => $simple_product['ean13'],
                         'name' => $product->getName(),
                         'qty' => $this->getProductStockQty($product),
                         'price' => $currency->toCurrency(sprintf("%f", $price), ['display' => false]),
