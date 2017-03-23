@@ -282,6 +282,7 @@ class AssociatedProducts
                             ['id' => $product->getId()]
                         ) . '" target="_blank">' . $product->getName() . '</a>',
                         'sku' => $product->getSku(),
+                        'ean13' => $this->productRepository->getById($product->getId())->getData('ean13'),
                         'name' => $product->getName(),
                         'qty' => $this->getProductStockQty($product),
                         'price' => $currency->toCurrency(sprintf("%f", $price), ['display' => false]),
