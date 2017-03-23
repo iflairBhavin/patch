@@ -379,7 +379,6 @@ class ConfigurablePanel extends AbstractModifier
                             'product_link' => 'product_link',
                             'name' => 'name',
                             'sku' => 'sku',
-                            'ean13' => 'ean13',
                             'price' => 'price_number',
                             'price_string' => 'price',
                             'price_currency' => 'price_currency',
@@ -467,7 +466,6 @@ class ConfigurablePanel extends AbstractModifier
                         ['dataScope' => 'product_link']
                     ),
                     'sku_container' => $this->getColumn('sku', __('SKU')),
-                    'ean13_container' => $this->getColumn('ean13', __('EAN13')),
                     'price_container' => $this->getColumn(
                         'price',
                         __('Price'),
