@@ -36,6 +36,18 @@
                             <argument name="index" xsi:type="string">increment_id</argument>
                         </arguments>
                     </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="country">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Country</argument>
+                            <argument name="index" xsi:type="string">country</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="marketplace">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Marketplace</argument>
+                            <argument name="index" xsi:type="string">marketplace</argument>
+                        </arguments>
+                    </block>
                     <block class="Magento\Backend\Block\Widget\Grid\Column" as="shipping_description">
                         <arguments>
                             <argument name="header" xsi:type="string" translate="true">Shipping method</argument>
