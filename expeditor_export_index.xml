@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="magentix_expeditor_index_grid_block"/>
+    <head>
+        <title>Expeditor Inet Export</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magentix\Expeditor\Block\Adminhtml\Export\Grid" name="adminhtml.expeditor.export.container.container.grid" as="grid">
+                <arguments>
+                    <argument name="id" xsi:type="string">exportGrid</argument>
+                    <argument name="dataSource" xsi:type="object">Magentix\Expeditor\Model\ResourceModel\Export\Collection</argument>
+                    <argument name="default_sort" xsi:type="string">created_at</argument>
+                    <argument name="default_dir" xsi:type="string">DESC</argument>
+                    <argument name="default_filter" xsi:type="array">
+                        <item name="expeditor_is_exported" xsi:type="string">0</item>
+                    </argument>
+                </arguments>
+                <block class="Magento\Backend\Block\Widget\Grid\Massaction" name="expeditor.export.grid.massaction" as="grid.massaction">
+                    <arguments>
+                        <argument name="massaction_id_field" xsi:type="string">order_id</argument>
+                        <argument name="form_field_name" xsi:type="string">order_ids</argument>
+                        <argument name="use_select_all" xsi:type="string">1</argument>
+                        <argument name="options" xsi:type="array">
+                            <item name="export" xsi:type="array">
+                                <item name="label" xsi:type="string" translate="true">Export</item>
+                                <item name="url" xsi:type="string">*/*/export</item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" name="adminhtml.expeditor.export.container.container.grid.columnSet" as="grid.columnSet">
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="increment_id">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Order ID</argument>
+                            <argument name="index" xsi:type="string">increment_id</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="shipping_description">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Shipping method</argument>
+                            <argument name="index" xsi:type="string">shipping_description</argument>
+                            <argument name="type" xsi:type="string">options</argument>
+                            <argument name="options" xsi:type="options" model="Magentix\Expeditor\Model\Grid\Options\Shipping"/>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="weight">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Weight</argument>
+                            <argument name="index" xsi:type="string">weight</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="status">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Status</argument>
+                            <argument name="index" xsi:type="string">status</argument>
+                            <argument name="type" xsi:type="string">options</argument>
+                            <argument name="options" xsi:type="options" model="Magentix\Expeditor\Model\Grid\Options\Status"/>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="created_at">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Date</argument>
+                            <argument name="index" xsi:type="string">created_at</argument>
+                            <argument name="type" xsi:type="string">datetime</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="expeditor_is_exported">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Exported</argument>
+                            <argument name="index" xsi:type="string">expeditor_is_exported</argument>
+                            <argument name="type" xsi:type="string">options</argument>
+                            <argument name="renderer" xsi:type="string">Magentix\Expeditor\Block\Adminhtml\Export\Grid\Column\Renderer\Exported</argument>
+                            <argument name="options" xsi:type="array">
+                                <item name="no" xsi:type="array">
+                                    <item name="value" xsi:type="string">0</item>
+                                    <item name="label" xsi:type="string" translate="true">No</item>
+                                </item>
+                                <item name="yes" xsi:type="array">
+                                    <item name="value" xsi:type="string">1</item>
+                                    <item name="label" xsi:type="string" translate="true">Yes</item>
+                                </item>
+                            </argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
