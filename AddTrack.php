@@ -21,6 +21,7 @@ class AddTrack extends \Magento\Backend\App\Action
      * @var \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoader
      */
     protected $shipmentLoader;
+    protected $_eventManager;
 
     /**
      * @param Action\Context $context
@@ -31,6 +32,7 @@ class AddTrack extends \Magento\Backend\App\Action
         \Magento\Shipping\Controller\Adminhtml\Order\ShipmentLoader $shipmentLoader
     ) {
         $this->shipmentLoader = $shipmentLoader;
+        $this->_eventManager = $context->getEventManager();
         parent::__construct($context);
     }
 
@@ -68,6 +70,8 @@ class AddTrack extends \Magento\Backend\App\Action
                     $title
                 );
                 $shipment->addTrack($track)->save();
+                $eventParameters = ['order' => $shipment->getOrder(), 'tracking' => array('carrier' => $carrier, 'title' => $title, 'number' => $number)];
+                $this->_eventManager->dispatch('lengow_sync_send_tracking_details', $eventParameters);
 
                 $this->_view->loadLayout();
                 $this->_view->getPage()->getConfig()->getTitle()->prepend(__('Shipments'));
