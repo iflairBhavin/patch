@@ -120,7 +120,7 @@ class Match implements QueryInterface
             $queryValue = $preprocessor->process($queryValue);
         }
 
-        $stringPrefix = '';
+        $stringPrefix = '+';
         if ($conditionType === BoolExpression::QUERY_CONDITION_MUST) {
             $stringPrefix = '+';
         } elseif ($conditionType === BoolExpression::QUERY_CONDITION_NOT) {
