@@ -339,7 +339,29 @@ class Import extends \Magento\Framework\DataObject
             $this->_adminhtmlData->getUrl('sales/order/view', ['order_id' => $order->getId()])
         );
 
-        if (!$order->canShip()) {
+        if($order->hasShipments())
+        {
+            $carrier = $order->getShippingMethod(true);
+
+            foreach($order->getShipmentsCollection() as $item) {
+                $ship_id = $item->getId();
+                if($ship_id) {
+                    $this->_shipmentLoader->setOrderId($order->getId());
+                    $this->_shipmentLoader->setShipmentId($ship_id);
+                    $shipment = $this->_shipmentLoader->load();
+                    if ($shipment) {
+                        $track = $this->_objectManager->create('Magento\Sales\Model\Order\Shipment\Track')->setNumber($this->getTracking())->setCarrierCode($carrier->getCarrierCode())->setTitle($order->getShippingDescription());
+                        $shipment->addTrack($track)->save();
+                    }
+                }
+            }
+
+            $this->setStatus(1);
+            $this->setMessage(__('Success'));
+            return $this;
+        }
+        else if (!$order->canShip()) 
+        {
             return $this->setMessage(__('Order cannot be shipped'));
         }
 
