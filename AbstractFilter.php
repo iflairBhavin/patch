@@ -388,6 +388,6 @@ abstract class AbstractFilter extends \Magento\Framework\DataObject implements F
      */
     protected function isOptionReducesResults($optionCount, $totalSize)
     {
-        return $optionCount < $totalSize;
+        return $optionCount <= $totalSize;
     }
 }
