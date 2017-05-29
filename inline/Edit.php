@@ -19,7 +19,6 @@ class Edit extends \Magento\Catalog\Controller\Adminhtml\Product
      * @var \Magento\Framework\View\Result\PageFactory
      */
     protected $resultPageFactory;
-    protected $sessionObj;
 
     /**
      * @param \Magento\Backend\App\Action\Context $context
@@ -33,7 +32,6 @@ class Edit extends \Magento\Catalog\Controller\Adminhtml\Product
     ) {
         parent::__construct($context, $productBuilder);
         $this->resultPageFactory = $resultPageFactory;
-        $this->sessionObj = $context->getSession();
     }
 
     /**
@@ -43,7 +41,6 @@ class Edit extends \Magento\Catalog\Controller\Adminhtml\Product
      */
     public function execute()
     {
-        $this->sessionObj->setCustomArea($_SERVER['HTTP_REFERER']);
         /** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
         $storeManager = $this->_objectManager->get('Magento\Store\Model\StoreManagerInterface');
         $storeId = (int) $this->getRequest()->getParam('store', 0);
