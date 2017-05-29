@@ -51,6 +51,7 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
      * @var StoreManagerInterface
      */
     private $storeManager;
+    protected $sessionObj;
 
     /**
      * Save constructor.
@@ -74,6 +75,7 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
         $this->productCopier = $productCopier;
         $this->productTypeManager = $productTypeManager;
         $this->productRepository = $productRepository;
+        $this->sessionObj = $context->getSession();
         parent::__construct($context, $productBuilder);
     }
 
@@ -86,6 +88,7 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
      */
     public function execute()
     {
+        $currArea = $this->sessionObj->getCustomArea();
         $storeId = $this->getRequest()->getParam('store', 0);
         $store = $this->getStoreManager()->getStore($storeId);
         $this->getStoreManager()->setCurrentStore($store->getCode());
@@ -171,7 +174,11 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
                 ['id' => $productId, '_current' => true, 'set' => $productAttributeSetId]
             );
         } else {
-            $resultRedirect->setPath('catalog/*/', ['store' => $storeId]);
+            if(strpos($currArea, 'iflair_product') === false) {
+                $resultRedirect->setPath('catalog/*/', ['store' => $storeId]);
+            } else {
+                $resultRedirect->setPath('iflair_product/catalog/index', ['store' => $storeId]);
+            }
         }
         return $resultRedirect;
     }
