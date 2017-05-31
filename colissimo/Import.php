@@ -63,7 +63,6 @@ class Import extends \Magento\Framework\DataObject
      * @var \Magento\Backend\Helper\Data
      */
     protected $_adminhtmlData;
-    protected $_eventManager;
 
     /**
      * Constructor
@@ -85,7 +84,6 @@ class Import extends \Magento\Framework\DataObject
         OrderModel $orderModel,
         ObjectManagerInterface $objectManager,
         \Magento\Backend\Helper\Data $adminhtmlData,
-        \Magento\Framework\Event\ManagerInterface $eventManager,
         array $data = []
     )
     {
@@ -97,7 +95,6 @@ class Import extends \Magento\Framework\DataObject
         $this->_orderModel = $orderModel;
         $this->_objectManager = $objectManager;
         $this->_adminhtmlData = $adminhtmlData;
-        $this->_eventManager = $eventManager;
     }
 
     /**
@@ -342,29 +339,7 @@ class Import extends \Magento\Framework\DataObject
             $this->_adminhtmlData->getUrl('sales/order/view', ['order_id' => $order->getId()])
         );
 
-        if($order->hasShipments())
-        {
-            $carrier = $order->getShippingMethod(true);
-
-            foreach($order->getShipmentsCollection() as $item) {
-                $ship_id = $item->getId();
-                if($ship_id) {
-                    $this->_shipmentLoader->setOrderId($order->getId());
-                    $this->_shipmentLoader->setShipmentId($ship_id);
-                    $shipment = $this->_shipmentLoader->load();
-                    if ($shipment) {
-                        $track = $this->_objectManager->create('Magento\Sales\Model\Order\Shipment\Track')->setNumber($this->getTracking())->setCarrierCode($carrier->getCarrierCode())->setTitle($order->getShippingDescription());
-                        $shipment->addTrack($track)->save();
-                    }
-                }
-            }
-
-            $this->setStatus(1);
-            $this->setMessage(__('Success'));
-            return $this;
-        }
-        else if (!$order->canShip()) 
-        {
+        if (!$order->canShip()) {
             return $this->setMessage(__('Order cannot be shipped'));
         }
 
@@ -396,8 +371,6 @@ class Import extends \Magento\Framework\DataObject
             $this->setStatus(1);
             $this->setMessage(__('Success'));
 
-            $eventParameters = ['order' => $order, 'tracking' => array('carrier' => $carrier->getCarrierCode(), 'title' => $order->getShippingDescription(), 'number' => $this->getTracking())];
-            $this->_eventManager->dispatch('lengow_sync_send_tracking_details', $eventParameters);
         } catch (Exception $e) {
             $this->setMessage(__('Error'));
         }
