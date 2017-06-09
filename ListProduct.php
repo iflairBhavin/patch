@@ -380,7 +380,6 @@ class ListProduct extends AbstractProduct implements IdentityInterface
      */
     protected function getPriceRender()
     {
-        return $this->getLayout()->getBlock('product.price.render.default')
-            ->setData('is_product_list', true);
+        return $this->getLayout()->getBlock('product.price.render.default');
     }
 }
