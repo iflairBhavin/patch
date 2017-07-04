@@ -496,14 +496,14 @@ class QuoteManagement implements \Magento\Quote\Api\CartManagementInterface
             );
             $this->quoteRepository->save($quote);
         } catch (\Exception $e) {
-            $this->eventManager->dispatch(
+            /*$this->eventManager->dispatch(
                 'sales_model_service_quote_submit_failure',
                 [
                     'order'     => $order,
                     'quote'     => $quote,
                     'exception' => $e
                 ]
-            );
+            );*/
             throw $e;
         }
         return $order;
