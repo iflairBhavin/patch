@@ -495,7 +495,7 @@ class Session extends \Magento\Framework\Session\SessionManager
                 $quote->setIsActive(1)->setReservedOrderId(null);
                 $this->quoteRepository->save($quote);
                 $this->replaceQuote($quote)->unsLastRealOrderId();
-                $this->_eventManager->dispatch('restore_quote', ['order' => $order, 'quote' => $quote]);
+                //$this->_eventManager->dispatch('restore_quote', ['order' => $order, 'quote' => $quote]);
                 return true;
             } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
             }
