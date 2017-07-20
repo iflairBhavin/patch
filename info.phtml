@@ -42,5 +42,6 @@
         <?php else: ?>
             <?php /* @escapeNotVerified */ echo __('No shipping information available'); ?>
         <?php endif; ?>
+        <div><?php echo $block->getChildHtml('shipment_tracking') ?></div>
     </div>
 </div>
