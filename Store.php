@@ -1170,7 +1170,7 @@ class Store extends AbstractExtensibleModel implements
             . $storeParsedUrl['host']
             . (isset($storeParsedUrl['port']) ? ':' . $storeParsedUrl['port'] : '')
             . $storeParsedUrl['path']
-            . $requestString
+            //. $requestString
             . ($storeParsedQuery ? '?' . http_build_query($storeParsedQuery, '', '&amp;') : '');
 
         return $currentUrl;
