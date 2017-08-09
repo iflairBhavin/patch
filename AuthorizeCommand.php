@@ -28,7 +28,7 @@ class AuthorizeCommand implements CommandInterface
         $formattedAmount = $order->getBaseCurrency()->formatTxt($amount);
 
         if ($payment->getIsTransactionPending()) {
-            //$state = Order::STATE_PAYMENT_REVIEW;
+            $state = Order::STATE_PAYMENT_REVIEW;
             $message = 'We will authorize %1 after the payment is approved at the payment gateway.';
         } else {
             $message = 'Authorized amount of %1.';
