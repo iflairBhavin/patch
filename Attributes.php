@@ -80,9 +80,9 @@ class Attributes extends \Magento\Framework\View\Element\Template
                 $value = $attribute->getFrontend()->getValue($product);
 
                 if (!$product->hasData($attribute->getAttributeCode())) {
-                    $value = __('');
+                    $value = __('N/A');
                 } elseif ((string)$value == '') {
-                    $value = __('');
+                    $value = __('No');
                 } elseif ($attribute->getFrontendInput() == 'price' && is_string($value)) {
                     $value = $this->priceCurrency->convertAndFormat($value);
                 }
