@@ -914,6 +914,8 @@ abstract class AbstractEntity extends AbstractResource implements EntityInterfac
             $select->where('entity_type_id = :entity_type_id');
         }
 
+        $select->where('row_id != :row_id');
+        $bind['row_id'] = $object->getRowId();
         $data = $connection->fetchCol($select, $bind);
 
         if ($object->getId()) {
