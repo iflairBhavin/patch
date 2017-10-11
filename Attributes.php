@@ -15,6 +15,9 @@ use Magento\Catalog\Model\Product;
 use Magento\Framework\Phrase;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 
+/**
+ * Product attributes block.
+ */
 class Attributes extends \Magento\Framework\View\Element\Template
 {
     /**
@@ -59,6 +62,7 @@ class Attributes extends \Magento\Framework\View\Element\Template
         if (!$this->_product) {
             $this->_product = $this->_coreRegistry->registry('product');
         }
+
         return $this->_product;
     }
 
@@ -80,9 +84,9 @@ class Attributes extends \Magento\Framework\View\Element\Template
                 $value = $attribute->getFrontend()->getValue($product);
 
                 if (!$product->hasData($attribute->getAttributeCode())) {
-                    $value = __('');
-                } elseif ((string)$value == '' || (string)$value == 'No') {
-                    $value = __('');
+                    $value = __('N/A');
+                } elseif ((string)$value == '') {
+                    $value = __('No');
                 } elseif ($attribute->getFrontendInput() == 'price' && is_string($value)) {
                     $value = $this->priceCurrency->convertAndFormat($value);
                 }
@@ -96,6 +100,7 @@ class Attributes extends \Magento\Framework\View\Element\Template
                 }
             }
         }
+
         return $data;
     }
 }
