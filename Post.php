@@ -74,7 +74,7 @@ class Post extends \Magento\Contact\Controller\Index
                 __('Thanks for contacting us with your comments and questions. We\'ll respond to you very soon.')
             );
             $this->getDataPersistor()->clear('contact_us');
-            $this->_redirect('contact/index');
+            $this->_redirect($this->storeManager->getStore()->getUrl('thank-you'));
             return;
         } catch (\Exception $e) {
             $this->inlineTranslation->resume();
