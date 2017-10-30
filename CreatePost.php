@@ -302,12 +302,13 @@ class CreatePost extends \Magento\Customer\Controller\AbstractAccount
             if ($confirmationStatus === AccountManagementInterface::ACCOUNT_CONFIRMATION_REQUIRED) {
                 $email = $this->customerUrl->getEmailConfirmationUrl($customer->getEmail());
                 // @codingStandardsIgnoreStart
-                $this->messageManager->addSuccess(
+                /*$this->messageManager->addSuccess(
                     __(
                         'You must confirm your account. Please check your email for the confirmation link or <a href="%1">click here</a> for a new link.',
                         $email
                     )
-                );
+                );*/
+                $this->messageManager->addSuccess(__('Thank you for registering with %1. We will get back to you shortly.', $this->storeManager->getStore()->getFrontendName()));
                 // @codingStandardsIgnoreEnd
                 $url = $this->urlModel->getUrl('*/*/index', ['_secure' => true]);
                 $resultRedirect->setUrl($this->_redirect->success($url));

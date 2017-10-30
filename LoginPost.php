@@ -163,10 +163,11 @@ class LoginPost extends \Magento\Customer\Controller\AbstractAccount
                     }
                 } catch (EmailNotConfirmedException $e) {
                     $value = $this->customerUrl->getEmailConfirmationUrl($login['username']);
-                    $message = __(
+                    /*$message = __(
                         'This account is not confirmed. <a href="%1">Click here</a> to resend confirmation email.',
                         $value
-                    );
+                    );*/
+                    $message = __('This account is not confirmed.');
                     $this->messageManager->addError($message);
                     $this->session->setUsername($login['username']);
                 } catch (UserLockedException $e) {
