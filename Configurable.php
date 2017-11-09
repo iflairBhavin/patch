@@ -634,7 +634,7 @@ class Configurable extends \Magento\Catalog\Model\Product\Type\AbstractType
                 $collection->addTierPriceData();
                 $usedProducts = $collection->getItems();
 
-                $this->getCache()->save(
+                /*$this->getCache()->save(
                     serialize(array_map(
                         function ($item) {
                             return $item->getData();
@@ -651,7 +651,7 @@ class Configurable extends \Magento\Catalog\Model\Product\Type\AbstractType
                             self::TYPE_CODE . '_' . $productId
                         ]
                     )
-                );
+                );*/
             }
             $product->setData($this->_usedProducts, $usedProducts);
         }
