@@ -515,7 +515,7 @@ class Deploy extends Command
 
         // MAGECLOUD-1317 avoid key collision on system between env.php and config.local.php
         $config['system']['default']['catalog']['search'] = array_replace_recursive(
-            $config['system']['default']['catalog']['search'] ?? [],
+            $config['system']['default']['catalog']['search'],
             $this->getSearchEngineConfiguration()
         );
         $updatedConfig = '<?php'  . "\n" . 'return ' . var_export($config, true) . ';';
