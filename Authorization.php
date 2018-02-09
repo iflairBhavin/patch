@@ -46,7 +46,7 @@ class Authorization
     ) {
         $result = $proceed($order, $value, $field);
         if (!$this->isAllowed($order)) {
-            throw NoSuchEntityException::singleField('orderId', $order->getId());
+            //throw NoSuchEntityException::singleField('orderId', $order->getId());
         }
         return $result;
     }
