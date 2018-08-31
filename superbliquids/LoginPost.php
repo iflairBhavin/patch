@@ -150,6 +150,24 @@ class LoginPost extends \Magento\Customer\Controller\AbstractAccount
             if (!empty($login['username']) && !empty($login['password'])) {
                 try {
                     $customer = $this->customerAccountManagement->authenticate($login['username'], $login['password']);
+
+                    //change by iFlair start
+                    if(method_exists($customer, 'getId'))
+                    {
+                        $cid = $customer->getId();
+                        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                        $customerObj = $objectManager->create('Magento\Customer\Model\Customer')->load($cid);
+                        $is_approved = $customerObj->getData('is_approved');
+                        if($is_approved != "1") {
+                            $message = __('This account is not confirmed');
+                            $this->messageManager->addError($message);
+                            $this->session->setUsername($login['username']);
+
+                            return $this->accountRedirect->getRedirect();
+                        }
+                    }
+                    //end
+
                     $this->session->setCustomerDataAsLoggedIn($customer);
                     $this->session->regenerateId();
                     if ($this->getCookieManager()->getCookie('mage-cache-sessid')) {

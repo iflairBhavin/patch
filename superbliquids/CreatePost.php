@@ -322,6 +322,15 @@ class CreatePost extends \Magento\Customer\Controller\AbstractAccount
                 ['account_controller' => $this, 'customer' => $customer]
             );
 
+            //change by iFlair start
+            $message = __('Thank you for registering with %1. We will get back to you shortly!', $this->storeManager->getStore()->getFrontendName());
+            $this->messageManager->addSuccess($message);
+            $url = $this->urlModel->getUrl('*/*/index', ['_secure' => true]);
+            $resultRedirect->setUrl($this->_redirect->success($url));
+
+            return $resultRedirect;
+            //end
+
             $confirmationStatus = $this->accountManagement->getConfirmationStatus($customer->getId());
             if ($confirmationStatus === AccountManagementInterface::ACCOUNT_CONFIRMATION_REQUIRED) {
                 $email = $this->customerUrl->getEmailConfirmationUrl($customer->getEmail());
