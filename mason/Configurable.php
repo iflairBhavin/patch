@@ -1302,9 +1302,9 @@ class Configurable extends \Magento\Catalog\Model\Product\Type\AbstractType
             $usedProducts = $this->readUsedProductsCacheData($cacheKey);
             if ($usedProducts === null) {
                 $collection = $this->getConfiguredUsedProductCollection($product, false);
-                /*if ($salableOnly) {
+                if ($salableOnly) {
                     $collection = $this->salableProcessor->process($collection);
-                }*/
+                }
                 $usedProducts = array_values($collection->getItems());
                 $this->saveUsedProductsCacheData($product, $usedProducts, $cacheKey);
             }
