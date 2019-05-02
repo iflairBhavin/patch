@@ -1298,7 +1298,7 @@ class Configurable extends \Magento\Catalog\Model\Product\Type\AbstractType
     private function loadUsedProducts(\Magento\Catalog\Model\Product $product, $cacheKey, $salableOnly = false)
     {
         $dataFieldName = $salableOnly ? $this->usedSalableProducts : $this->_usedProducts;
-        if (!$product->hasData($dataFieldName)) {
+        //if (!$product->hasData($dataFieldName)) {
             $usedProducts = $this->readUsedProductsCacheData($cacheKey);
             if ($usedProducts === null) {
                 $collection = $this->getConfiguredUsedProductCollection($product, false);
@@ -1309,7 +1309,7 @@ class Configurable extends \Magento\Catalog\Model\Product\Type\AbstractType
                 $this->saveUsedProductsCacheData($product, $usedProducts, $cacheKey);
             }
             $product->setData($dataFieldName, $usedProducts);
-        }
+        //}
 
         return $product->getData($dataFieldName);
     }
