@@ -43,6 +43,7 @@ class Configurable
     private $keysPost = [
         'status',
         'sku',
+        'ean13',
         'name',
         'price',
         'configurable_attribute',
