@@ -293,7 +293,6 @@ class AssociatedProducts
                             ['id' => $product->getId()]
                         ) . '" target="_blank">' . $this->escaper->escapeHtml($product->getName()) . '</a>',
                         'sku' => $product->getSku(),
-                        'ean13' => $product->getData('ean13'),
                         'name' => $this->escaper->escapeHtml($product->getName()),
                         'qty' => $this->getProductStockQty($product),
                         'price' => $price,
