@@ -381,6 +381,7 @@ class ConfigurablePanel extends AbstractModifier
                             'product_link' => 'product_link',
                             'name' => 'name',
                             'sku' => 'sku',
+                            'ean13' => 'ean13',
                             'price' => 'price_number',
                             'price_string' => 'price',
                             'price_currency' => 'price_currency',
@@ -480,6 +481,12 @@ class ConfigurablePanel extends AbstractModifier
                         [
                             'elementTmpl' => 'Magento_ConfigurableProduct/components/cell-sku',
                         ]
+                    ),
+                    'ean13_container' => $this->getColumn(
+                        'ean13',
+                        __('EAN13'),
+                        ['dataScope' => 'ean13'],
+                        ['dataScope' => 'ean13']
                     ),
                     'price_container' => $this->getColumn(
                         'price',
